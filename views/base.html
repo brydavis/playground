@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Playground</title>
+	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<style type="text/css">
+		body {
+			display: initial;
+		}
+
+		div.header {
+			border-bottom: 1px solid #01579B;
+			width: 100%;
+			position: fixed;
+			background-color: white;
+			z-index: 999;
+		}
+
+		header {
+			margin: 11px auto;
+			width: 70%;
+		}
+
+		p.header {
+			color: #01579B; /*00BCD4;*/
+			font-size: 24px;
+			margin: 0;
+			/*margin-bottom: 10px;*/
+			width: 50%;
+			float: left;
+		}
+
+		p.menu {
+			float: right;
+			margin-bottom: 6px;
+			margin-top: -4px;
+
+		}
+
+		span.menu {
+			color: #F8BBD0;
+			font-size: 28px;
+		}
+
+		div.content {
+			margin-top: 110px;
+			width: 70%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.textarea {
+			width: 44%;
+			padding: 10px;
+			position: absolute;
+			background-color: #E0F7FA; /* #B2EBF2; /* #80DEEA; */
+			min-height: 500px;
+			height: 70%;
+			/*border: none;*/
+			border: 1px solid #01579B;
+		    overflow: auto;
+		    outline: none;
+		    -webkit-box-shadow: none;
+		    -moz-box-shadow: none;
+		    box-shadow: none;
+		    margin-bottom: 15px;
+		}
+
+		textarea {
+			width: 100%;
+			height: 100%;
+			border: none;
+			background-color: #E0F7FA;
+		    overflow: auto;
+		    outline: none;
+		    -webkit-box-shadow: none;
+		    -moz-box-shadow: none;
+		    box-shadow: none;
+
+		}
+
+		button.submit {
+			color: white;
+			background-color: #01579B;
+			border: 1px solid  #01579B;
+			padding: 10px;
+			float: right;
+			margin-left: 89%;
+			margin-top: -2%;
+			position: absolute;
+			z-index: 100;
+
+		}
+
+		.pre{
+			width: 35%;
+			max-height: 70%;
+			float: right;
+			min-height: 50px;
+		}
+
+		pre{
+			width: 35%;
+			max-height: 70%;
+			float: right;
+			min-height: 50px;
+		}
+
+
+	</style>
+
+</head>
+<body>
+	<div class="header">
+		<header>
+			<a href="/">		
+				<p class="header lead">PLAYGROUND</p>
+			</a>
+			<a href="">
+				<p class="menu lead"><span class="menu">&#9776;</span></p>
+			</a>
+		</header>
+	</div>
+	<div class="content">
+		<form action="/" method="post">
+			<div class="textarea">
+				<button type="submit" id="submit" class="submit h5">RUN</button>
+				<textarea name="data" id="data" value="">{{ printf "%s" .Code }}</textarea>
+			</div>
+			<pre>{{ printf "%s" .Text }}</pre>
+		</form>
+		<!-- <pre>{{ printf "%s" .Text }}</pre> -->
+	</div>
+</body>
+</html>

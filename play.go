@@ -35,9 +35,11 @@ func Root(w http.ResponseWriter, r *http.Request) {
 
 		out, err := exec.Command("./example").Output()
 		if err != nil {
-			fmt.Println(err)
+			// fmt.Println(err)
+			out = []byte(err.Error())
 		}
 
+		exec.Command("rm", "example").Run()
 		view, _ := ioutil.ReadFile("views/base.html")
 		t := template.New("output")
 		t, err = t.Parse(string(view))
@@ -69,5 +71,4 @@ func Root(w http.ResponseWriter, r *http.Request) {
 		}
 
 	}
-
 }

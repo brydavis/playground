@@ -20,10 +20,8 @@ func main() {
 
 		if len(output) == 0 {
 			fmt.Print(strconv.Itoa(i))
-
 			// fmt.Print(i)
 		}
-
 		fmt.Println(output)
 	}
 }

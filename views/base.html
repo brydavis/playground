@@ -21,22 +21,23 @@
 
 		header {
 			margin: 11px auto;
-			width: 70%;
+			width: 100%;
 		}
 
 		p.header {
 			color: #01579B; /*00BCD4;*/
 			font-size: 24px;
 			margin: 0;
-			/*margin-bottom: 10px;*/
 			width: 50%;
 			float: left;
+			margin-left: 40px; 
 		}
 
 		p.menu {
 			float: right;
 			margin-bottom: 6px;
 			margin-top: -4px;
+			margin-right: 40px;
 
 		}
 
@@ -46,34 +47,67 @@
 		}
 
 		div.content {
-			margin-top: 110px;
-			width: 70%;
+			width: 100%;
+			height: 100%
+			bottom: 0;
+			float: left;
+			margin-top: 52px;
 			margin-left: auto;
 			margin-right: auto;
 		}
 
 		.textarea {
-			width: 44%;
+			width: 65%;
+			height: 100%;
+
 			padding: 10px;
-			position: absolute;
+
+			position: fixed;
+			/*position: absolute;*/
+			bottom: 0;
+
+			border-right: 1px solid #01579B;
+			/*border: 1px solid #01579B;*/
 			background-color: #E0F7FA; /* #B2EBF2; /* #80DEEA; */
-			min-height: 500px;
-			height: 70%;
-			/*border: none;*/
-			border: 1px solid #01579B;
+
 		    overflow: auto;
 		    outline: none;
 		    -webkit-box-shadow: none;
 		    -moz-box-shadow: none;
 		    box-shadow: none;
-		    margin-bottom: 15px;
+
+		}
+
+		.textarea .linenums {
+			position: absolute;
+			padding-right: 10px;
+			text-align: right;
+			margin-top: 60px;
+
+
+		}
+		
+		.textarea .linenums .num {
+			color: #80DEEA;
+			font-size: 16px;
+			font-family: Consolas, Monaco, 'Andale Mono', monospace;
 		}
 
 		textarea {
-			width: 100%;
+			font-size: 16px;
+			width: 90%;
 			height: 100%;
 			border: none;
+			border-left: 1px dotted #B2EBF2; 
+			display: table;
+
+			padding: 0;
+			margin-top: 60px;
+			margin-left: 30px;
+			padding-left: 10px;
+			
 			background-color: #E0F7FA;
+			font-family: Consolas, Monaco, 'Andale Mono', monospace;
 		    overflow: auto;
 		    outline: none;
 		    -webkit-box-shadow: none;
@@ -89,7 +123,8 @@
 			padding: 10px;
 			float: right;
 			margin-left: 89%;
-			margin-top: -2%;
+			margin-top: 60px;
+			
 			position: absolute;
 			z-index: 100;
 
@@ -117,7 +152,7 @@
 	<div class="header">
 		<header>
 			<a href="/">		
-				<p class="header lead">PLAYGROUND</p>
+				<p class="header lead">PLAYGO</p>
 			</a>
 			<a href="">
 				<p class="menu lead"><span class="menu">&#9776;</span></p>
@@ -128,11 +163,109 @@
 		<form action="/" method="post">
 			<div class="textarea">
 				<button type="submit" id="submit" class="submit h5">RUN</button>
+				<div class="linenums">
+<!-- 					<div class="num">1</div>
+					<div class="num">2</div>
+					<div class="num">3</div>
+					<div class="num">4</div> -->
+				</div>
+
 				<textarea name="data" id="data" value="">{{ printf "%s" .Code }}</textarea>
 			</div>
 			<pre>{{ printf "%s" .Text }}</pre>
 		</form>
 		<!-- <pre>{{ printf "%s" .Text }}</pre> -->
 	</div>
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			linesCode()
+
+
+			// TAB Plug-in
+
+
+
+
+
+			$("textarea").allowTabChar()
+
+
+
+
+
+		})
+
+
+
+
+
+
+		function linesCode () {
+			var textarea = $("textarea")
+
+			var code = textarea.html()
+			var lines = code.match(/\n/gmi)
+			var linenums = $("div.linenums")
+			for (var i = 1; i <= lines.length+20; i++) {
+				linenums.append("<div class=\"num\">"+i+"</div>")
+			}
+			// textarea.keyup(function(e) {
+			//     linesCode()
+			// })
+		}
+
+
+			(function($) {
+			    function pasteIntoInput(el, text) {
+			        el.focus();
+			        if (typeof el.selectionStart == "number") {
+			            var val = el.value;
+			            var selStart = el.selectionStart;
+			            el.value = val.slice(0, selStart) + text + val.slice(el.selectionEnd);
+			            el.selectionEnd = el.selectionStart = selStart + text.length;
+			        } else if (typeof document.selection != "undefined") {
+			            var textRange = document.selection.createRange();
+			            textRange.text = text;
+			            textRange.collapse(false);
+			            textRange.select();
+			        }
+			    }
+
+			    function allowTabChar(el) {
+			        $(el).keydown(function(e) {
+			            if (e.which == 9) {
+			                pasteIntoInput(this, "\t");
+			                return false;
+			            }
+			        });
+
+			        // For Opera, which only allows suppression of keypress events, not keydown
+			        $(el).keypress(function(e) {
+			            if (e.which == 9) {
+			                return false;
+			            }
+			        });
+			    }
+
+			    $.fn.allowTabChar = function() {
+			        if (this.jquery) {
+			            this.each(function() {
+			                if (this.nodeType == 1) {
+			                    var nodeName = this.nodeName.toLowerCase();
+			                    if (nodeName == "textarea" || (nodeName == "input" && this.type == "text")) {
+			                        allowTabChar(this);
+			                    }
+			                }
+			            })
+			        }
+			        return this;
+			    }
+			})(jQuery);
+
+	</script>
+
 </body>
 </html>

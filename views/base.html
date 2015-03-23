@@ -20,17 +20,17 @@
 		}
 
 		header {
-			margin: 11px auto;
+			margin: 4px auto;
 			width: 100%;
 		}
 
 		p.header {
 			color: #01579B; /*00BCD4;*/
-			font-size: 24px;
-			margin: 0;
+			font-size: 20px;
+			font-weight: 400;
+			margin: 4px 40px;
 			width: 50%;
 			float: left;
-			margin-left: 40px; 
 		}
 
 		p.menu {
@@ -38,7 +38,6 @@
 			margin-bottom: 6px;
 			margin-top: -4px;
 			margin-right: 40px;
-
 		}
 
 		span.menu {
@@ -51,7 +50,7 @@
 			height: 100%
 			bottom: 0;
 			float: left;
-			margin-top: 52px;
+			margin-top: 45px;
 			margin-left: auto;
 			margin-right: auto;
 		}
@@ -59,17 +58,11 @@
 		.textarea {
 			width: 65%;
 			height: 100%;
-
 			padding: 10px;
-
 			position: fixed;
-			/*position: absolute;*/
 			bottom: 0;
-
 			border-right: 1px solid #01579B;
-			/*border: 1px solid #01579B;*/
 			background-color: #E0F7FA; /* #B2EBF2; /* #80DEEA; */
-
 		    overflow: auto;
 		    outline: none;
 		    -webkit-box-shadow: none;
@@ -80,15 +73,18 @@
 
 		.textarea .linenums {
 			position: absolute;
-			padding-right: 10px;
+			border-right: 1px dotted #80DEEA;
 			text-align: right;
 			margin-top: 60px;
-
-
+			padding-right: 0px;
+			margin-left: -10px;
+			width: 42px;
 		}
 		
 		.textarea .linenums .num {
 			color: #80DEEA;
+			background-color: #E0F7FA; 
+			padding-right: 12px;
 			font-size: 16px;
 			font-family: Consolas, Monaco, 'Andale Mono', monospace;
 		}
@@ -96,16 +92,12 @@
 		textarea {
 			font-size: 16px;
 			width: 90%;
-			height: 100%;
 			border: none;
-			border-left: 1px dotted #B2EBF2; 
 			display: table;
-
 			padding: 0;
 			margin-top: 60px;
-			margin-left: 30px;
+			margin-left: 34px;
 			padding-left: 10px;
-			
 			background-color: #E0F7FA;
 			font-family: Consolas, Monaco, 'Andale Mono', monospace;
 		    overflow: auto;
@@ -113,7 +105,6 @@
 		    -webkit-box-shadow: none;
 		    -moz-box-shadow: none;
 		    box-shadow: none;
-
 		}
 
 		button.submit {
@@ -124,27 +115,29 @@
 			float: right;
 			margin-left: 89%;
 			margin-top: 60px;
-			
 			position: absolute;
 			z-index: 100;
-
 		}
 
-		.pre{
+		.output {
 			width: 35%;
-			max-height: 70%;
+			height: 100%;
+			padding: 10px;
+			margin-left: 65%;
+			bottom: 0;
 			float: right;
-			min-height: 50px;
+			background-color: rgb(245, 245, 245);
+			font-family: Consolas, Monaco, 'Andale Mono', monospace;
+			font-size: 14px;
 		}
 
-		pre{
-			width: 35%;
-			max-height: 70%;
-			float: right;
-			min-height: 50px;
+		.pre {
+			width: 95%;
+			margin-top: 10px;
+			margin-right: auto; 
+			margin-left: auto;
+			text-align: justify;
 		}
-
-
 	</style>
 
 </head>
@@ -160,110 +153,102 @@
 		</header>
 	</div>
 	<div class="content">
-		<form action="/" method="post">
+		<form action="/" method="post" spellcheck="false">
 			<div class="textarea">
-				<button type="submit" id="submit" class="submit h5">RUN</button>
-				<div class="linenums">
-<!-- 					<div class="num">1</div>
-					<div class="num">2</div>
-					<div class="num">3</div>
-					<div class="num">4</div> -->
-				</div>
-
-				<textarea name="data" id="data" value="">{{ printf "%s" .Code }}</textarea>
+				<button type="submit" id="editor" class="submit h5">RUN</button>
+				<div class="linenums"></div>
+				<textarea name="data" id="data">{{ printf "%s" .Code }}</textarea>
 			</div>
-			<pre>{{ printf "%s" .Text }}</pre>
+			<div class="output">
+				<div class="pre">{{ printf "%s" .Text }}</div>
+			</div>
 		</form>
-		<!-- <pre>{{ printf "%s" .Text }}</pre> -->
 	</div>
 
 	<script type="text/javascript">
 
-		$(document).ready(function() {
+		var map = {13: false, 16: false};
 
-			linesCode()
-
-
-			// TAB Plug-in
-
-
-
-
-
-			$("textarea").allowTabChar()
-
-
-
-
-
-		})
-
-
-
-
-
+		$(document)
+			.ready(function() {
+				linesCode()
+				$("textarea").allowTabChar()
+				$("textarea").keyup(linesCode)
+				if ($(".output").height() < $(".pre").height()) {
+					$(".output").height($(".pre").height())				
+				}
+				
+			})
+			.keydown(function(e) {
+			    if (e.keyCode in map) {
+			        map[e.keyCode] = true;
+			        if (map[13] && map[16]) {
+						e.preventDefault()
+			            $("button#editor").click()
+			        }
+			    }
+			}).keyup(function(e) {
+			    if (e.keyCode in map) {
+			        map[e.keyCode] = false;
+			    }
+			});
 
 		function linesCode () {
-			var textarea = $("textarea")
-
-			var code = textarea.html()
-			var lines = code.match(/\n/gmi)
 			var linenums = $("div.linenums")
-			for (var i = 1; i <= lines.length+20; i++) {
+			linenums.html("")
+			var code = $("textarea").val()
+			var lines = code.match(/\n/gmi)
+			for (var i = 1; i <= lines.length+50; i++) {
 				linenums.append("<div class=\"num\">"+i+"</div>")
 			}
-			// textarea.keyup(function(e) {
-			//     linesCode()
-			// })
 		}
 
+		(function($) {
+		    function pasteIntoInput(el, text) {
+		        el.focus();
+		        if (typeof el.selectionStart == "number") {
+		            var val = el.value;
+		            var selStart = el.selectionStart;
+		            el.value = val.slice(0, selStart) + text + val.slice(el.selectionEnd);
+		            el.selectionEnd = el.selectionStart = selStart + text.length;
+		        } else if (typeof document.selection != "undefined") {
+		            var textRange = document.selection.createRange();
+		            textRange.text = text;
+		            textRange.collapse(false);
+		            textRange.select();
+		        }
+		    }
 
-			(function($) {
-			    function pasteIntoInput(el, text) {
-			        el.focus();
-			        if (typeof el.selectionStart == "number") {
-			            var val = el.value;
-			            var selStart = el.selectionStart;
-			            el.value = val.slice(0, selStart) + text + val.slice(el.selectionEnd);
-			            el.selectionEnd = el.selectionStart = selStart + text.length;
-			        } else if (typeof document.selection != "undefined") {
-			            var textRange = document.selection.createRange();
-			            textRange.text = text;
-			            textRange.collapse(false);
-			            textRange.select();
-			        }
-			    }
+		    function allowTabChar(el) {
+		        $(el).keydown(function(e) {
+		            if (e.which == 9) {
+		                pasteIntoInput(this, "\t");
+		                return false;
+		            }
+		        });
 
-			    function allowTabChar(el) {
-			        $(el).keydown(function(e) {
-			            if (e.which == 9) {
-			                pasteIntoInput(this, "\t");
-			                return false;
-			            }
-			        });
+		        // For Opera, which only allows suppression of keypress events, not keydown
+		        $(el).keypress(function(e) {
+		            if (e.which == 9) {
+		                return false;
+		            }
+		        });
+		    }
 
-			        // For Opera, which only allows suppression of keypress events, not keydown
-			        $(el).keypress(function(e) {
-			            if (e.which == 9) {
-			                return false;
-			            }
-			        });
-			    }
-
-			    $.fn.allowTabChar = function() {
-			        if (this.jquery) {
-			            this.each(function() {
-			                if (this.nodeType == 1) {
-			                    var nodeName = this.nodeName.toLowerCase();
-			                    if (nodeName == "textarea" || (nodeName == "input" && this.type == "text")) {
-			                        allowTabChar(this);
-			                    }
-			                }
-			            })
-			        }
-			        return this;
-			    }
-			})(jQuery);
+		    $.fn.allowTabChar = function() {
+		        if (this.jquery) {
+		            this.each(function() {
+		                if (this.nodeType == 1) {
+		                    var nodeName = this.nodeName.toLowerCase();
+		                    if (nodeName == "textarea" || (nodeName == "input" && this.type == "text")) {
+		                        allowTabChar(this);
+		                    }
+		                }
+		            })
+		        }
+		        return this;
+		    }
+		})(jQuery);
 
 	</script>
 

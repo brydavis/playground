@@ -1,7 +1,9 @@
 Playground
 =========================
 
-Built from scratch.  Built for [Go](http://golang.org).
+Built from scratch.  
+Built with love.
+Built for [Go](http://golang.org).
 
 <br>
 <br>

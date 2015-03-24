@@ -1,0 +1,131 @@
+body {
+	display: initial;
+}
+
+div.header {
+	border-bottom: 1px solid #01579B;
+	width: 100%;
+	position: fixed;
+	background-color: white;
+	z-index: 999;
+}
+
+header {
+	margin: 4px auto;
+	width: 100%;
+}
+
+p.header {
+	color: #01579B; /*00BCD4;*/
+	font-size: 20px;
+	font-weight: 400;
+	margin: 4px 40px;
+	width: 50%;
+	float: left;
+}
+
+p.menu {
+	float: right;
+	margin-bottom: 6px;
+	margin-top: -4px;
+	margin-right: 40px;
+}
+
+span.menu {
+	color: #F8BBD0;
+	font-size: 28px;
+}
+
+div.content {
+	width: 100%;
+	height: 100%
+	bottom: 0;
+	float: left;
+	margin-top: 45px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.textarea {
+	width: 65%;
+	height: 100%;
+	padding: 10px;
+	position: fixed;
+	bottom: 0;
+	border-right: 1px solid #01579B;
+	background-color: #E0F7FA; /* #B2EBF2; /* #80DEEA; */
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+}
+
+.textarea .linenums {
+	position: absolute;
+	border-right: 1px dotted #80DEEA;
+	text-align: right;
+	margin-top: 60px;
+	padding-right: 0px;
+	margin-left: -10px;
+	width: 42px;
+}
+
+.textarea .linenums .num {
+	color: #80DEEA;
+	background-color: #E0F7FA; 
+	padding-right: 12px;
+	font-size: 16px;
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+}
+
+textarea {
+	font-size: 16px;
+	width: 90%;
+	border: none;
+	display: table;
+	padding: 0;
+	margin-top: 60px;
+	margin-left: 34px;
+	padding-left: 10px;
+	background-color: #E0F7FA;
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+button.submit {
+	color: white;
+	background-color: #01579B;
+	border: 1px solid  #01579B;
+	padding: 10px;
+	float: right;
+	margin-left: 89%;
+	margin-top: 60px;
+	position: absolute;
+	z-index: 100;
+}
+
+.output {
+	width: 35%;
+	height: 100%;
+	padding: 10px;
+	margin-left: 65%;
+	bottom: 0;
+	float: right;
+	background-color: rgb(245, 245, 245);
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+	font-size: 14px;
+}
+
+.pre {
+	width: 95%;
+	margin-top: 10px;
+	margin-right: auto; 
+	margin-left: auto;
+	text-align: justify;
+}

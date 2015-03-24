@@ -2,143 +2,12 @@
 <html>
 <head>
 	<title>Playground</title>
+	<script type="text/javascript" src="static/js/test.js"></script>
+	<link rel="icon" type="image/x-icon" href="static/favicon.ico">
 	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-	<style type="text/css">
-		body {
-			display: initial;
-		}
-
-		div.header {
-			border-bottom: 1px solid #01579B;
-			width: 100%;
-			position: fixed;
-			background-color: white;
-			z-index: 999;
-		}
-
-		header {
-			margin: 4px auto;
-			width: 100%;
-		}
-
-		p.header {
-			color: #01579B; /*00BCD4;*/
-			font-size: 20px;
-			font-weight: 400;
-			margin: 4px 40px;
-			width: 50%;
-			float: left;
-		}
-
-		p.menu {
-			float: right;
-			margin-bottom: 6px;
-			margin-top: -4px;
-			margin-right: 40px;
-		}
-
-		span.menu {
-			color: #F8BBD0;
-			font-size: 28px;
-		}
-
-		div.content {
-			width: 100%;
-			height: 100%
-			bottom: 0;
-			float: left;
-			margin-top: 45px;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.textarea {
-			width: 65%;
-			height: 100%;
-			padding: 10px;
-			position: fixed;
-			bottom: 0;
-			border-right: 1px solid #01579B;
-			background-color: #E0F7FA; /* #B2EBF2; /* #80DEEA; */
-		    overflow: auto;
-		    outline: none;
-		    -webkit-box-shadow: none;
-		    -moz-box-shadow: none;
-		    box-shadow: none;
-
-		}
-
-		.textarea .linenums {
-			position: absolute;
-			border-right: 1px dotted #80DEEA;
-			text-align: right;
-			margin-top: 60px;
-			padding-right: 0px;
-			margin-left: -10px;
-			width: 42px;
-		}
-		
-		.textarea .linenums .num {
-			color: #80DEEA;
-			background-color: #E0F7FA; 
-			padding-right: 12px;
-			font-size: 16px;
-			font-family: Consolas, Monaco, 'Andale Mono', monospace;
-		}
-
-		textarea {
-			font-size: 16px;
-			width: 90%;
-			border: none;
-			display: table;
-			padding: 0;
-			margin-top: 60px;
-			margin-left: 34px;
-			padding-left: 10px;
-			background-color: #E0F7FA;
-			font-family: Consolas, Monaco, 'Andale Mono', monospace;
-		    overflow: auto;
-		    outline: none;
-		    -webkit-box-shadow: none;
-		    -moz-box-shadow: none;
-		    box-shadow: none;
-		}
-
-		button.submit {
-			color: white;
-			background-color: #01579B;
-			border: 1px solid  #01579B;
-			padding: 10px;
-			float: right;
-			margin-left: 89%;
-			margin-top: 60px;
-			position: absolute;
-			z-index: 100;
-		}
-
-		.output {
-			width: 35%;
-			height: 100%;
-			padding: 10px;
-			margin-left: 65%;
-			bottom: 0;
-			float: right;
-			background-color: rgb(245, 245, 245);
-			font-family: Consolas, Monaco, 'Andale Mono', monospace;
-			font-size: 14px;
-		}
-
-		.pre {
-			width: 95%;
-			margin-top: 10px;
-			margin-right: auto; 
-			margin-left: auto;
-			text-align: justify;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 
 
 
@@ -176,10 +45,7 @@
 				linesCode()
 				$("textarea").allowTabChar()
 				$("textarea").keyup(linesCode)
-				if ($(".output").height() < $(".pre").height()) {
-					$(".output").height($(".pre").height())				
-				}
-				
+					$(".output").height($(document).height())				
 			})
 			.keydown(function(e) {
 			    if (e.keyCode in map) {
@@ -193,7 +59,7 @@
 			    if (e.keyCode in map) {
 			        map[e.keyCode] = false;
 			    }
-			});
+			})
 
 		function linesCode () {
 			var linenums = $("div.linenums")
@@ -207,50 +73,50 @@
 
 		(function($) {
 		    function pasteIntoInput(el, text) {
-		        el.focus();
+		        el.focus()
 		        if (typeof el.selectionStart == "number") {
-		            var val = el.value;
-		            var selStart = el.selectionStart;
-		            el.value = val.slice(0, selStart) + text + val.slice(el.selectionEnd);
-		            el.selectionEnd = el.selectionStart = selStart + text.length;
+		            var val = el.value
+		            var selStart = el.selectionStart
+		            el.value = val.slice(0, selStart) + text + val.slice(el.selectionEnd)
+		            el.selectionEnd = el.selectionStart = selStart + text.length
 		        } else if (typeof document.selection != "undefined") {
-		            var textRange = document.selection.createRange();
-		            textRange.text = text;
-		            textRange.collapse(false);
-		            textRange.select();
+		            var textRange = document.selection.createRange()
+		            textRange.text = text
+		            textRange.collapse(false)
+		            textRange.select()
 		        }
 		    }
 
 		    function allowTabChar(el) {
 		        $(el).keydown(function(e) {
 		            if (e.which == 9) {
-		                pasteIntoInput(this, "\t");
-		                return false;
+		                pasteIntoInput(this, "\t")
+		                return false
 		            }
-		        });
+		        })
 
 		        // For Opera, which only allows suppression of keypress events, not keydown
 		        $(el).keypress(function(e) {
 		            if (e.which == 9) {
-		                return false;
+		                return false
 		            }
-		        });
+		        })
 		    }
 
 		    $.fn.allowTabChar = function() {
 		        if (this.jquery) {
 		            this.each(function() {
 		                if (this.nodeType == 1) {
-		                    var nodeName = this.nodeName.toLowerCase();
+		                    var nodeName = this.nodeName.toLowerCase()
 		                    if (nodeName == "textarea" || (nodeName == "input" && this.type == "text")) {
-		                        allowTabChar(this);
+		                        allowTabChar(this)
 		                    }
 		                }
 		            })
 		        }
-		        return this;
+		        return this
 		    }
-		})(jQuery);
+		})(jQuery)
 
 	</script>
 

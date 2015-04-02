@@ -36,7 +36,7 @@
             this.each(function() {
                 if (this.nodeType == 1) {
                     var nodeName = this.nodeName.toLowerCase()
-                    if (nodeName == "textarea" || (nodeName == "input" && this.type == "text")) {
+                    if (nodeName == "textarea" || (nodeName == "input" && this.type == "text") || (nodeName == "div" && this.id == "editor")) {
                         allowTabChar(this)
                     }
                 }

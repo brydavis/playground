@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Playground</title>
-	<script type="text/javascript" src="static/js/test.js"></script>
 	<link rel="icon" type="image/x-icon" href="static/favicon.ico">
 	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -13,17 +12,25 @@
 	<div class="header">
 		<header>
 			<a href="/">		
-				<p class="header lead">PLAYGO</p>
+				<!-- <p class="header lead">play [ <img id="nav-gopher" src="static/img/gopher_face.svg"> ]</p> -->
+				<p class="title lead">play ( <img id="nav-gopher" src="static/img/gopher_face.svg"> )</p>
 			</a>
-			<a href="">
+			<!-- <a href="">
 				<p class="menu lead"><span class="menu">&#9776;</span></p>
-			</a>
+			</a> -->
+			<nav class="menu">
+				<a id="open" title="Open" href="file:///Users/brydavis/Downloads/hello.go"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>				
+				<a id="save" title="Save" href="/"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></a>				
+				<a id="run" title="Run" href="/"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>				
+				<a id="exit" title="Logout" href="/"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></a>	
+
+			</nav>
 		</header>
 	</div>
 	<div class="content">
-		<form action="/" method="post" spellcheck="false">
+		<form id="script" action="/" method="post" spellcheck="false">
 			<div class="textarea">
-				<button type="submit" id="editor" class="submit h5">RUN</button>
+				<!-- <button type="submit" id="editor" class="submit h5">RUN</button> -->
 				<div class="linenums"></div>
 				<textarea name="data" id="data">{{ printf "%s" .Code }}</textarea>
 			</div>
@@ -34,5 +41,6 @@
 	</div>
 	<script type="text/javascript" src="static/js/ready.js"></script>
 	<script type="text/javascript" src="static/js/allowtabs.js"></script>
+	<script type="text/javascript" src="static/js/save.js"></script>
 </body>
 </html>

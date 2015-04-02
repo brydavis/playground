@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
 	"strconv"
 	"time"
@@ -17,14 +19,31 @@ type Output struct {
 }
 
 func main() {
-	http.HandleFunc("/", Root)
-	http.HandleFunc("/static/", Static)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	port := ":8080"
+	http.HandleFunc("/", RootHandler)
+	http.HandleFunc("/static/", StaticHandler)
+	go AdminTerminal(port)
+	if err := http.ListenAndServe(port, nil); err != nil {
 		log.Fatal(err)
+	}
+
+}
+
+func AdminTerminal(port string) {
+	fmt.Println("Listening @ " + port)
+	exit := false
+	for !exit {
+		scanner := bufio.NewScanner(os.Stdin)
+		fmt.Print("$ ")
+		scanner.Scan()
+		input := scanner.Text()
+		// RECEIVE INPUT HERE
+		// WRITE TO AND COMPILE
+		fmt.Println(input)
 	}
 }
 
-func Root(w http.ResponseWriter, r *http.Request) {
+func RootHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		filename := "temp" + strconv.Itoa(int(time.Now().Unix()))
 		filepath := "temp/" + filename + ".go"
@@ -69,6 +88,6 @@ func Templify(view, code, out []byte, w http.ResponseWriter) {
 	}
 }
 
-func Static(w http.ResponseWriter, r *http.Request) {
+func StaticHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, r.URL.Path[1:])
 }

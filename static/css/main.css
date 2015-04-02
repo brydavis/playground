@@ -11,17 +11,72 @@ div.header {
 }
 
 header {
-	margin: 4px auto;
+	/*margin: 4px auto;*/
 	width: 100%;
 }
 
-p.header {
+p.title {
 	color: #01579B; /*00BCD4;*/
 	font-size: 20px;
-	font-weight: 400;
-	margin: 4px 40px;
+	font-weight: 600;
+	margin-top: 0; /*2px;*/
+	margin-right: 40px;
+	margin-left: 40px;
+	margin-bottom: 0; /*4px;*/
 	width: 50%;
 	float: left;
+	padding-top: 5px;
+}
+
+
+::selection {
+	background-color: rgba(1,87,255,0.1);
+	color: white;
+}
+::-moz-selection {
+	background-color: rgba(1,87,255,0.1);
+	color: white;
+
+}
+
+
+
+
+
+nav.menu {
+	float: right;
+	/*margin-bottom: 6px;*/
+	/*margin-top: 8px;*/
+	margin-right: 40px;
+}
+
+nav.menu a {
+	padding: 10px 15px;
+	float: left;
+	margin: 0px 10px 0px 10px;
+	font-size: 16px;
+	color: #01579B; /*00BCD4;*/
+	font-weight: 500;
+	text-decoration: none;
+	border: 2px solid white;
+	text-align: center;
+
+}
+
+nav.menu a:hover {
+	border: 2px solid #01579B;
+	background-color: #01579B;
+	color: white;
+}
+
+nav.menu a#exit {
+	color: #9b0130;
+}
+
+nav.menu a#exit:hover {
+	border: 2px solid #9b0130;
+	background-color: #9b0130;
+	color: white;
 }
 
 p.menu {
@@ -41,7 +96,7 @@ div.content {
 	height: 100%
 	bottom: 0;
 	float: left;
-	margin-top: 45px;
+	margin-top: 0; /*40px;*/
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -51,7 +106,7 @@ div.content {
 	height: 100%;
 	padding: 10px;
 	position: fixed;
-	bottom: 0;
+	/*bottom: 0;*/
 	border-right: 1px solid #01579B;
 	background-color: #E0F7FA; /* #B2EBF2; /* #80DEEA; */
     overflow: auto;
@@ -66,7 +121,7 @@ div.content {
 	position: absolute;
 	border-right: 1px dotted #80DEEA;
 	text-align: right;
-	margin-top: 60px;
+	margin-top: 55px;
 	padding-right: 0px;
 	margin-left: -10px;
 	width: 42px;
@@ -86,7 +141,7 @@ textarea {
 	border: none;
 	display: table;
 	padding: 0;
-	margin-top: 60px;
+	margin-top: 55px;
 	margin-left: 34px;
 	padding-left: 10px;
 	background-color: #E0F7FA;
@@ -124,8 +179,15 @@ button.submit {
 
 .pre {
 	width: 95%;
-	margin-top: 10px;
+	margin-top: 55px;
 	margin-right: auto; 
 	margin-left: auto;
 	text-align: justify;
+}
+
+
+impg.nav-gopher {
+
+	width: 20px
+
 }

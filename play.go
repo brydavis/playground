@@ -13,6 +13,8 @@ import (
 	"time"
 )
 
+import play "./lib"
+
 type Output struct {
 	Code []byte
 	Text []byte
@@ -22,7 +24,10 @@ func main() {
 	port := ":8080"
 	http.HandleFunc("/", RootHandler)
 	http.HandleFunc("/static/", StaticHandler)
+	http.HandleFunc("/save/", play.SaveHandler)
+
 	go AdminTerminal(port)
+
 	if err := http.ListenAndServe(port, nil); err != nil {
 		log.Fatal(err)
 	}

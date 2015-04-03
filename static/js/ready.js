@@ -15,7 +15,10 @@ $(document)
 
 		$("a#save").click(function(e) {
 			e.preventDefault()
-	        saveTextAsFile()
+			var filepath = prompt('Save as...')
+			$.post("/save", { textarea: $("textarea").val(), filepath: filepath }, function(result) {
+				console.log(result)
+			})
 		})
 
 	})

@@ -15,12 +15,19 @@ $(document)
 
 		$("a#save").click(function(e) {
 			e.preventDefault()
-			var filepath = prompt('Save as...')
-			$.post("/save", { textarea: $("textarea").val(), filepath: filepath }, function(result) {
-				console.log(result)
+			$('#myModal').modal('toggle')
+
+
+			$('.btn.save').click(function(e) {
+				e.preventDefault()
+				// var filepath = prompt('Save as...', $("input#workdir").val())
+				$.post("/save/", { textarea: $("textarea").val(), filepath: $('input#saveFile').val() }, function(result) {
+					console.log(result)
+					$('#myModal').modal('toggle')
+
+				})
 			})
 		})
-
 	})
 	.keydown(function(e) {
 	    if (e.keyCode in map) {

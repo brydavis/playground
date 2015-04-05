@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>Playground</title>
 	<link rel="icon" type="image/x-icon" href="static/favicon.ico">
 	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -9,16 +10,14 @@
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 </head>
 <body>
+
 	<div class="header">
 		<header>
 			<a href="/">		
-				<!-- <p class="header lead">play [ <img id="nav-gopher" src="static/img/gopher_face.svg"> ]</p> -->
 				<p class="title lead">play ( <img id="nav-gopher" src="static/img/gopher_face.svg"> )</p>
 			</a>
-			<!-- <a href="">
-				<p class="menu lead"><span class="menu">&#9776;</span></p>
-			</a> -->
 			<nav class="menu">
+				<input type="text" name="filename" value="untitled.go">
 				<a id="open" title="Open" href="file:///Users/brydavis/Downloads/hello.go"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>				
 				<a id="save" title="Save" href="/"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></a>				
 				<a id="run" title="Run" href="/"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>				
@@ -29,8 +28,9 @@
 	</div>
 	<div class="content">
 		<form id="script" action="/" method="post" spellcheck="false">
+			<input id="workdir" type="hidden" value="{{.Workdir}}">
+			
 			<div class="textarea">
-				<!-- <button type="submit" id="editor" class="submit h5">RUN</button> -->
 				<div class="linenums"></div>
 				<textarea name="data" id="data">{{ printf "%s" .Code }}</textarea>
 			</div>
@@ -39,10 +39,33 @@
 			</div>
 		</form>
 	</div>
+
+
+
 	<script type="text/javascript" src="static/js/ready.js"></script>
 	<script type="text/javascript" src="static/js/allowtabs.js"></script>
-<!-- 
-	<script type="text/javascript" src="static/js/save.js"></script>
-	 -->
+
+	
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	      		<input id="saveFile" type="text" value="{{.Workdir}}">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary save">Save</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
 </body>
 </html>

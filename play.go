@@ -2,18 +2,18 @@ package main
 
 import "net/http"
 
-import . "./lib"
+import "./lib"
 
 func main() {
 	port := ":8080"
-	http.HandleFunc("/", RootHandler)
+	http.HandleFunc("/", play.RootHandler)
 	http.HandleFunc("/static/", StaticHandler)
-	http.HandleFunc("/editor/", EditorHandler)
-	http.HandleFunc("/save/", SaveHandler)
+	// http.HandleFunc("/editor/", play.EditorHandler)
+	http.HandleFunc("/save/", play.SaveHandler)
 
-	go http.ListenAndServe(port, nil)
+	http.ListenAndServe(port, nil)
 
-	AdminTerminal(port)
+	// AdminTerminal(port)
 
 }
 
